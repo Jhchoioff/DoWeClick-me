@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CompatibilitySection, { type InputMode } from './CompatibilitySection'
+import ExampleReading from './ExampleReading'
 import './hero-sequence.css'
 
 export default function App() {
@@ -35,13 +36,13 @@ export default function App() {
             </div>
             <div className="hero-final flex flex-col items-center">
               <div className="hero-final-eyebrow mb-6 flex items-center gap-2 rounded-full px-4 py-1.5 sm:mb-8 sm:px-5 sm:py-2">
-                <span className="font-sans text-xs font-medium tracking-wider text-amber-300 sm:text-sm">KOREAN SAJU, REIMAGINED DAILY</span>
+                <span className="hero-editorial-label"><span className="hero-editorial-title">Korean Saju</span><span className="hero-editorial-subtitle">REIMAGINED FOR TODAY</span></span>
               </div>
-              <h1 className="hero-headline max-w-4xl text-4xl leading-[0.95] font-normal text-white sm:text-5xl md:text-6xl lg:text-7xl" aria-label="Do you click today?">
-                <span aria-hidden="true"><span className="hero-word">Do</span>{' '}<span className="hero-word">you</span>{' '}<span className="hero-word">click</span>{' '}<span className="hero-word">today?</span></span>
+              <h1 className="hero-headline max-w-4xl text-4xl leading-[0.95] font-normal text-white sm:text-5xl md:text-6xl lg:text-7xl" aria-label="Do We Click Today?">
+                <span aria-hidden="true"><span className="hero-word">Do</span>{' '}<span className="hero-word">We</span>{' '}<span className="hero-word">Click</span>{' '}<span className="hero-word">Today?</span></span>
               </h1>
-              <p className="hero-description mx-auto mt-5 max-w-xl font-sans text-sm leading-snug font-light text-white/70 sm:mt-7 sm:text-base md:text-lg">Inspired by Korean Saju and Five-Element philosophy—traditions used across Asia for generations to explore timing, personality, and compatibility.</p>
-              <p className="hero-difference">Not another Western zodiac score. This is your relationship rhythm for today.</p>
+              <p className="hero-description mx-auto mt-5 max-w-xl font-sans text-sm leading-snug font-light text-white/70 sm:mt-7 sm:text-base md:text-lg">Rooted in Korean Saju and Five-Element wisdom—an East Asian tradition shaped over thousands of years.</p>
+              <p className="hero-difference">Not another zodiac score. See where you flow, clash, and connect today.</p>
               <div className="hero-actions">
                 <a className="match-button" href="#compatibility" onClick={() => openInputs('birthdays')}>Reveal Today’s Chemistry <span aria-hidden="true">↗</span></a>
                 <a className="invite-button" href="#compatibility" onClick={() => openInputs('invite')}>Invite Someone</a>
@@ -50,6 +51,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      <ExampleReading onOpenBirthdays={() => openInputs('birthdays')} />
       <CompatibilitySection mode={mode} onModeChange={setMode} />
     </main>
   )
