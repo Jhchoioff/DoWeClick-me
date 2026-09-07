@@ -5,3 +5,50 @@
 }
 html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; background: black; }
 @supports (height: 100dvh) { .h-screen { height: 100dvh; } }
+
+/* Inclusive mobile breakpoint; desktop utilities remain unchanged. */
+@media (max-width: 640px) {
+  html, body, #root {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .hero-content {
+    min-height: inherit;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .hero-video {
+    /* Keep the central subject anchored as object-cover crops the sides. */
+    object-position: 50% 50%;
+  }
+
+  .hero-cta {
+    flex-shrink: 0;
+    padding-inline: 12px;
+    white-space: nowrap;
+  }
+
+  .hero-cta-desktop { display: none; }
+  .hero-cta-mobile { display: inline; }
+
+  .hero-headline {
+    max-width: 22rem;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    max-width: 22rem;
+    color: rgb(255 255 255 / 84%);
+    text-shadow: 0 1px 8px rgb(0 0 0 / 45%);
+    text-wrap: balance;
+  }
+}
