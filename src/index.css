@@ -3,52 +3,80 @@
   --font-serif: 'Instrument Serif', serif;
   --font-sans: 'Inter', sans-serif;
 }
-html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; background: black; }
+html, body, #root { width: 100%; min-height: 100%; margin: 0; background: black; }
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; }
 @supports (height: 100dvh) { .h-screen { height: 100dvh; } }
-
-/* Inclusive mobile breakpoint; desktop utilities remain unchanged. */
+a, button, input { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #e8c69b; outline-offset: 4px; }
+.hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 32px; font-family: var(--font-sans); }
+.match-button, .invite-button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 48px; padding: 14px 24px; border: 1px solid transparent; border-radius: 12px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-decoration: none; cursor: pointer; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.match-button { background: #f0e6d7; color: #201b16; box-shadow: 0 4px 24px #0002; }
+.match-button:hover { background: #fff5e6; transform: translateY(-1px); }
+.match-button span { font-size: 18px; line-height: 1; }
+.invite-button { color: #f5f1eb; background: #0003; border-color: #ffffff40; backdrop-filter: blur(12px); }
+.invite-button:hover { background: #ffffff12; border-color: #ffffff70; }
+.compatibility { position: relative; isolation: isolate; padding: 104px 24px 64px; scroll-margin-top: 20px; color: #f5f1eb; font-family: var(--font-sans); background: radial-gradient(ellipse at 50% 20%, #282126 0%, #101015 46%, #090a0e 85%); }
+.compatibility::before { content: ''; position: absolute; inset: 0 0 auto; height: 80px; background: linear-gradient(#000, transparent); pointer-events: none; }
+.compatibility-intro { position: relative; max-width: 700px; margin: 0 auto 40px; text-align: center; }
+.connection-orbits { position: relative; width: 82px; height: 46px; margin: 0 auto 26px; }
+.connection-orbits span { position: absolute; top: 0; width: 46px; height: 46px; border: 1px solid #dcb58780; border-radius: 50%; background: radial-gradient(circle at 30% 20%, #f0caa01c, transparent 70%); box-shadow: 0 0 28px #cba47812; }
+.connection-orbits span:first-child { left: 4px; }
+.connection-orbits span:last-child { right: 4px; border-color: #cbc1e078; }
+.compatibility-intro h2 { margin: 0; font-family: var(--font-serif); font-size: clamp(38px, 4.5vw, 56px); font-weight: 400; line-height: 1.1; text-wrap: balance; }
+.compatibility-intro h2:focus { outline: none; }
+.compatibility-intro > p { max-width: 460px; margin: 18px auto 0; color: #b8b3bc; font-size: 14px; line-height: 1.75; text-wrap: balance; }
+.match-panel { position: relative; max-width: 720px; margin: auto; padding: 30px; overflow: hidden; border: 1px solid #dfc6a52b; border-radius: 24px; background: linear-gradient(135deg, #ffffff06, transparent 50%), #17161de0; box-shadow: 0 24px 80px #0004, inset 0 1px 0 #ffffff06; backdrop-filter: blur(20px); }
+.input-options { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; min-width: 0; margin: 0 0 32px; padding: 5px; border: 1px solid #ffffff0e; border-radius: 13px; background: #090a0e70; }
+.input-options label { position: relative; min-width: 0; cursor: pointer; }
+.input-options input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.input-options label > span { display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 48px; padding: 10px; border: 1px solid transparent; border-radius: 9px; color: #a5a0ad; font-size: 12px; transition: background .2s ease, color .2s ease; }
+.option-number { font-size: 9px; color: #8e8494; }
+.input-options input:checked + span { border-color: #e6c7a62b; background: #e6c7a60d; color: #f1e5d6; }
+.input-options input:checked + span .option-number { color: #d9b58b; }
+.input-options input:focus-visible + span { outline: 2px solid #e8c69b; outline-offset: 2px; }
+.birthday-fields { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); align-items: end; gap: 12px; }
+.birthday-field { min-width: 0; }
+.birthday-field label, .invite-form > label { display: block; margin: 0 0 10px; color: #ded8e1; font-size: 12px; }
+.birthday-field input, .invite-link-row input { display: block; width: 100%; min-width: 0; min-height: 54px; padding: 14px; border: 1px solid #ffffff26; border-radius: 11px; background: #07080d66; color: #ece7ef; font-family: var(--font-sans); font-size: 16px; color-scheme: dark; }
+.birthday-field input:hover, .invite-link-row input:hover { border-color: #e6c7a650; }
+.birthday-join { align-self: end; padding-bottom: 10px; text-align: center; font-family: var(--font-serif); font-size: 28px; color: #c6a885; }
+.input-note { margin: 14px 0 24px; color: #a8a1ae; font-size: 11px; line-height: 1.7; }
+.reveal-button { width: 100%; }
+.form-feedback { color: #dfc8ac; font-size: 12px; line-height: 1.7; }
+.form-feedback p:not(:empty) { margin: 16px 0 0; padding: 14px; border-left: 2px solid #c6a885; border-radius: 0 8px 8px 0; background: #d1b38c08; }
+.match-trust { display: flex; justify-content: center; align-items: baseline; gap: 8px; margin: 24px 0 0; padding-top: 22px; border-top: 1px solid #ffffff0f; color: #b8b0bd; font-size: 11px; line-height: 1.7; text-align: center; }
+.match-trust span { color: #d9b58b; }
+.match-footnote { margin: 26px 0 0; color: #9e96a5; font-size: 11px; text-align: center; letter-spacing: .025em; }
+.invite-form h3 { margin: 0; font-family: var(--font-serif); font-size: 28px; font-weight: 400; }
+.invite-form > p:first-of-type { margin: 10px 0 24px; color: #b8b3bc; font-size: 13px; }
+.invite-link-row { display: flex; gap: 10px; }
+.invite-link-row input { flex: 1; font-size: 13px; }
+.invite-link-row button { flex-shrink: 0; padding-inline: 18px; }
 @media (max-width: 640px) {
-  html, body, #root {
-    height: auto;
-    min-height: 100%;
-    overflow: visible;
-  }
-
-  .hero {
-    height: auto;
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-
-  .hero-content {
-    min-height: inherit;
-    padding-bottom: max(24px, env(safe-area-inset-bottom));
-  }
-
-  .hero-video {
-    /* Keep the central subject anchored as object-cover crops the sides. */
-    object-position: 50% 50%;
-  }
-
-  .hero-cta {
-    flex-shrink: 0;
-    padding-inline: 12px;
-    white-space: nowrap;
-  }
-
-  .hero-cta-desktop { display: none; }
-  .hero-cta-mobile { display: inline; }
-
-  .hero-headline {
-    max-width: 22rem;
-    line-height: 1.08;
-    text-wrap: balance;
-  }
-
-  .hero-description {
-    max-width: 22rem;
-    color: rgb(255 255 255 / 84%);
-    text-shadow: 0 1px 8px rgb(0 0 0 / 45%);
-    text-wrap: balance;
-  }
+  html, body, #root { height: auto; min-height: 100%; }
+  .hero { height: auto; min-height: 100vh; min-height: 100dvh; }
+  .hero-content { min-height: inherit; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .hero-video { object-position: 50% 50%; }
+  .hero-cta { flex-shrink: 0; padding-inline: 12px; white-space: nowrap; }
+  .hero-headline { max-width: 22rem; line-height: 1.08; text-wrap: balance; }
+  .hero-description { max-width: 22rem; color: rgb(255 255 255 / 84%); text-shadow: 0 1px 8px rgb(0 0 0 / 45%); text-wrap: balance; }
+  .hero-actions { gap: 10px; margin-top: 26px; }
+  .hero-actions .match-button, .hero-actions .invite-button { padding-inline: 16px; font-size: 12px; gap: 10px; }
+  .compatibility { padding: 76px 20px 44px; }
+  .compatibility-intro { margin-bottom: 30px; }
+  .compatibility-intro > p { font-size: 13px; }
+  .match-panel { padding: 20px; border-radius: 20px; }
+  .input-options { margin-bottom: 26px; }
+  .input-options label > span { padding: 10px 6px; font-size: 11px; text-align: center; }
+  .option-number { display: none; }
+  .birthday-fields { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .birthday-join { display: none; }
+  .invite-link-row { flex-direction: column; }
+  .match-trust { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .match-button, .invite-button, .hero-cta, .input-options label > span { transition: none; }
+  .match-button:hover { transform: none; }
 }
