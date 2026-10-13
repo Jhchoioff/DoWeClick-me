@@ -15,7 +15,7 @@ export default function App() {
     <main>
       <section className="hero relative h-screen w-full overflow-hidden bg-black font-serif" aria-label="Welcome to DoWeClick">
         <video autoPlay muted loop playsInline className="hero-video absolute inset-0 h-full w-full object-cover" aria-hidden="true">
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260806_134653_2b70d062-3521-429b-a824-8d9f98de488a.mp4" type="video/mp4" />
+          <source src="https://media.doweclick.me/doweclick-hero-1080p.mp4" type="video/mp4" />
         </video>
         <div className="hero-readability" aria-hidden="true" />
         <div className="hero-content relative z-10 flex h-full w-full flex-col">
